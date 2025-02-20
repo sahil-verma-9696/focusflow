@@ -1,11 +1,18 @@
-import React from 'react'
+import React from "react";
 
 const Navbar = () => {
   return (
-    <nav className='bg-slate-600 text-white'>
-      i am nav bar
-    </nav>
-  )
-}
+    <nav>
+      <div></div>
 
-export default Navbar
+      <div className="nav-left">
+        <button>
+          <img src="/assets/fa-solid_users.png" alt="peoples" />
+          <span>Share</span>
+        </button>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;

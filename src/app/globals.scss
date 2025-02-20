@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Karantina&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 html {
   width: 100%;
   height: 100%;
@@ -18,19 +20,21 @@ body {
 
 aside {
   height: 100%;
-  background-color: rgb(200, 255, 253);
+  background-color: rgba(200,255,253,1);
   padding: 0 1rem;
-}
-aside .part-1 {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-bottom: 2px solid black;
-}
-aside .part-1 .heading {
-  font-size: 3rem;
-  font-family: Karantina;
-  font-weight: 100;
+
+  .part-1 {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 2px solid black;
+
+    .heading {
+      font-size: 3rem;
+      font-family: Karantina;
+      font-weight: 100;
+    }
+  }
 }
 
 main {
@@ -44,17 +48,22 @@ nav {
   background-color: red;
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 2rem;
+  padding: .5rem 2rem;
+
+  .nav-left {
+    button {
+      display: flex;
+      align-items: center;
+      background-color: black;
+      color: white;
+      padding: .5rem 1.2rem;
+      border-radius: .5rem;
+      gap: 1rem;
+    }
+  }
 }
-nav .nav-left button {
-  display: flex;
-  align-items: center;
-  background-color: black;
-  color: white;
-  padding: 0.5rem 1.2rem;
-  border-radius: 0.5rem;
-  gap: 1rem;
-}
+
+
 
 /* Scrollbar Track */
 ::-webkit-scrollbar {
@@ -65,7 +74,7 @@ nav .nav-left button {
 
 /* Scrollbar Thumb */
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(156, 254, 252);
+  background-color: rgba(156, 254, 252, 1);
   /* Color of the scrollbar */
   border-radius: 6px;
   /* Rounded corners */
@@ -76,7 +85,7 @@ nav .nav-left button {
 
 /* Scrollbar Thumb on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(156, 254, 252);
+  background-color: rgba(156, 254, 252, 1);
   /* Darker on hover */
 }
 
@@ -85,4 +94,4 @@ nav .nav-left button {
   background: transparent;
   /* Background of the track */
   border-radius: 6px;
-}/*# sourceMappingURL=globals.css.map */
+}

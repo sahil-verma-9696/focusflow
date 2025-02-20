@@ -2,7 +2,7 @@
 import React from "react";
 import style from "./page.css";
 import { increment } from "@/lib/store/features/global/slice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks/redux/hooks";
 const page = () => {
   const val = useAppSelector((store) => store.global.value);
 

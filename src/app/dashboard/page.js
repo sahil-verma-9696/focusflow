@@ -1,49 +1,103 @@
 "use client";
-import React from "react";
 import style from "./page.css";
-import Sidebar from "@/components/Sidebar";
+import React, { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks/redux/hooks";
 import TaskInput from "@/components/TaskInput";
+import { addTask } from "@/lib/store/features/tasks/slice";
+import {
+  addLabel,
+  deleteLabel,
+  renameLabel,
+} from "@/lib/store/features/labels/slice";
+import Task from "@/components/Task";
+import Menubar from "@/components/Menubar";
 
-const page = () => {
-  const tasks = useAppSelector((store) => store.tasks);
+const Page = () => {
   const dispatch = useAppDispatch();
-  function handleAddTask() {}
+  const labels = useAppSelector((state) => state.labels);
+  const tasks = useAppSelector((state) => state.tasks);
+
+  // Track open task inputs for each label
+  const [openTaskInputs, setOpenTaskInputs] = useState({});
+
+  function handleAddTask(task) {
+    dispatch(addTask(task));
+  }
+
+  const handleAddLabel = () => {
+    const label = prompt("Enter a label name");
+    if (label) {
+      dispatch(addLabel({ id: Math.random(), name: label }));
+    }
+  };
+
+  const toggleTaskInput = (labelId) => {
+    setOpenTaskInputs((prev) => ({
+      ...prev,
+      [labelId]: !prev[labelId], // Toggle specific label
+    }));
+  };
+
   return (
     <main className="dashboard-main">
-      <section className="view-nav">
-        <ul>
-          <li>board</li>
-        </ul>
+      <section className="dashboard-header">
+        <h1>Task Manager</h1>
+        <button onClick={handleAddLabel}>+ Add Label</button>
       </section>
-      <section className="task-container">
-        <div className="task-1 task">
-          <h2>In Progress</h2>
-          <ul>
-            {tasks?.map((task) => {
-              if (task.status === "In progress") {
-                return (
-                  <li key={task.id}>
-                    <div className="task-title">{task.title}</div>
-                    <div className="task-assignee">{task.assignee}</div>
-                    <div className="task-deadline">{task.deadline}</div>
-                  </li>
-                );
-              }
-            })}
-          </ul>
-        </div>
-        <div className="task add-btn">
-          <div onClick={handleAddTask} className="button-wrapper">
-            <button>+</button>
-            <span>Add Task</span>
-          </div>
+      <section className="label-section">
+        {labels?.map((label) => (
+          <div key={label.id} className="label">
+            <div className="label-header">
+              <h1>{label.name}</h1>
+              <Menubar
+                options={[
+                  {
+                    label: "➕ Add task",
+                    action: () => toggleTaskInput(label.id), // Open only for this label
+                  },
+                  {
+                    label: "📝 Rename Label",
+                    action: () => {
+                      const newName = prompt("Enter a new label name")
+                        .toLowerCase()
+                        .trim();
+                      if (newName) {
+                        dispatch(renameLabel({ id: label.id, newName }));
+                      }
+                    },
+                  },
+                  {
+                    label: "❌ Delete Label",
+                    action: () => dispatch(deleteLabel(label.id)),
+                  },
+                ]}
+              />
+            </div>
 
-          <TaskInput />
-        </div>
+            {/* Task Input (Only for this label) */}
+            {openTaskInputs[label.id] && (
+              <TaskInput
+                handleAddTask={handleAddTask}
+                isOpen={openTaskInputs[label.id]}
+                setIsOpen={() => toggleTaskInput(label.id)}
+              />
+            )}
+
+            <ul>
+              {tasks
+                ?.filter(
+                  (task) =>
+                    task.status.toLowerCase() === label.name.toLowerCase()
+                )
+                .map((task) => (
+                  <Task key={task.id} task={task} />
+                ))}
+            </ul>
+          </div>
+        ))}
       </section>
     </main>
   );
 };
 
-export default page;
+export default Page;

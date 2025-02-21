@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function TaskInput({ handleAddTask }) {
+export default function TaskInput({ handleAddTask, isOpen, setIsOpen }) {
   const [task, setTask] = useState({
     title: "",
     assignee: "",
@@ -10,6 +10,7 @@ export default function TaskInput({ handleAddTask }) {
   });
 
   const statuses = ["Backlog", "Ready", "In progress", "In review", "Done"];
+  const menuRef = useRef(null); // Assign ref to the modal div
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,21 +27,19 @@ export default function TaskInput({ handleAddTask }) {
       return;
     }
 
-    // Convert comma-separated assignees into an array
     const assigneesArray = task.assignee.split(",").map((a) => a.trim());
-
     const newTask = {
-      id: Date.now(), // Generate unique ID
+      id: Date.now(),
       title: task.title,
       assignee: assigneesArray,
       status: task.status,
       deadline: task.deadline,
       description: task.description,
-      "create At": new Date().toISOString(),
-      "modify At": new Date().toISOString(),
+      createdAt: new Date().toISOString(),
+      modifiedAt: new Date().toISOString(),
     };
 
-    handleAddTask(newTask); // Pass task to parent component
+    handleAddTask(newTask);
     setTask({
       title: "",
       assignee: "",
@@ -48,11 +47,40 @@ export default function TaskInput({ handleAddTask }) {
       deadline: "",
       description: "",
     });
+
+    setIsOpen(false);
   };
 
+  // ✅ Fix: Assign ref to modal div & prevent event listener from running when closed
+  useEffect(() => {
+    if (!isOpen) return; // Avoid running effect if modal is closed
+
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
+
+  if (!isOpen) return null;
+
   return (
-    <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md fixed top-0">
-      <h2 className="text-xl font-bold mb-4">Add New Task</h2>
+    <div
+      ref={menuRef} // ✅ Assign ref to the root modal div
+      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md taskinput fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+    >
+      <h2 className="text-xl font-bold mb-4 flex justify-between">
+        <span>Add New Task</span>
+        <span
+          className="font-extralight cursor-pointer close-btn"
+          onClick={() => setIsOpen(false)}
+        >
+          X
+        </span>
+      </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"

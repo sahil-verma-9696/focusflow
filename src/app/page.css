@@ -1,6 +1,137 @@
-main {
-  background-color: black;
+/* Global Styles */
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: auto;
+  scroll-behavior: smooth; 
+  scrollbar-color: rgba(242, 240, 240, 0.91) #eaeae7;
+  
 }
-main .part-1 {
+
+/* Enable scrolling */
+html, body {
+  height: 100%;
+  overflow: auto;
+  scroll-behavior: smooth; 
+}
+/* Navbar */
+.navbar {
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 0.8rem;
+  text-align: center;
+  background: linear-gradient(to right, #045e6b, #00eaff);
   color: white;
-}/*# sourceMappingURL=page.css.map */
+}
+
+/* Hero Section with Parallax Effect */
+.container {
+  background: url("https://img.freepik.com/premium-photo/innovation-with-purpose-hackathon-addressing-social-issues_879736-8441.jpg?semt=ais_hybrid") no-repeat center center/cover;
+  height: 350px;
+  width: 100%;
+  border: solid black;
+  position: relative;
+  background-attachment: fixed;
+}
+
+/* Content Section (below image) */
+.content-section {
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Buttons */
+.button-section {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+.button-1, .button-2, .button-3 {
+  background: linear-gradient(135deg, #00eaff, #007bff);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.button-1:hover, .button-2:hover, .button-3:hover {
+  transform: scale(1.1);
+  background: linear-gradient(135deg, #007bff, #00eaff);
+}
+
+/* Hackathon Cards */
+.hackathon-cards {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.card {
+  width: 200px;
+  height: 120px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: white;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+}
+
+.card-front, .card-back {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  backface-visibility: hidden;
+  transition: transform 0.6s;
+}
+
+.card-front {
+  background: #007bff;
+}
+
+.card-back {
+  background: #00eaff;
+  transform: rotateY(180deg);
+}
+
+.card:hover .card-front {
+  transform: rotateY(180deg);
+}
+
+.card:hover .card-back {
+  transform: rotateY(0);
+}
+
+/* Scroll to Top Button */
+.scroll-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+.scroll-top:hover {
+  background: #00eaff;
+}

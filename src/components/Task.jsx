@@ -1,68 +1,41 @@
 import React, { useState } from "react";
-import { MoreVertical } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { removeTask, editTask } from "@/lib/store/features/tasks/slice";
+import TaskInput from "@/components/TaskInput";
 import Menubar from "./Menubar";
 
-const Task = ({ task, onEdit, onDelete }) => {
+const TaskItem = ({ task }) => {
+  const dispatch = useDispatch();
+  const [isEditing, setIsEditing] = useState(false);
+
+  const handleDelete = () => {
+    dispatch(removeTask(task.id));
+  };
+
+  const handleEdit = (updatedTask) => {
+    dispatch(editTask(updatedTask));
+    setIsEditing(false);
+  };
 
   return (
-    <div
-      className="bg-white shadow-lg rounded-xl p-4 mb-4 relative w-full max-w-md"
-      key={task.id}
-    >
-      {/* Task Title & Actions */}
-      <div className="flex justify-between items-center">
-        <h1 className="text-lg font-semibold">{task.title}</h1>
-        <Menubar
-          options={[
-            {
-              label: "Edit",
-              action: () => onEdit(task.id),
-            },
-            {
-              label: "Delete",
-              action: () => onDelete(task.id),
-            },
-          ]}
+    <div className="flex justify-between items-center p-4 border-b">
+      {isEditing && (
+        <TaskInput
+          isOpen={isEditing}
+          setIsOpen={setIsEditing}
+          editingTask={task}
+          handleEditTask={handleEdit}
         />
-      </div>
-
-      {/* Task Details */}
-      <p className="text-sm text-gray-600 mt-1">
-        Assignee: <span className="font-medium">{task.assignee}</span>
-      </p>
-
-      {/* Status Badge */}
-      <div
-        className={`mt-2 text-xs font-medium inline-block px-3 py-1 rounded-full ${getStatusColor(
-          task.status
-        )}`}
-      >
-        {task.status}
-      </div>
-
-      {/* Deadline */}
-      <p className="text-sm text-gray-500 mt-2">Deadline: {task.deadline}</p>
-
-      {/* Description */}
-      <p className="text-gray-700 text-sm mt-2">{task.description}</p>
+      )}
+      <h1 className="text-lg font-semibold">{task.title}</h1>
+      <Menubar
+        options={[
+          { label: "Edit", action: () => setIsEditing(true) },
+          { label: "Delete", action: handleDelete },
+        ]}
+      />
     </div>
   );
 };
 
-// Helper function for status colors
-const getStatusColor = (status) => {
-  switch (status) {
-    case "Backlog":
-      return "bg-gray-200 text-gray-700";
-    case "In progress":
-      return "bg-blue-200 text-blue-700";
-    case "In review":
-      return "bg-yellow-200 text-yellow-700";
-    case "Ready":
-      return "bg-green-200 text-green-700";
-    default:
-      return "bg-gray-300 text-gray-800";
-  }
-};
-
-export default Task;
+export default TaskItem;

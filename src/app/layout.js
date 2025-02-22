@@ -26,11 +26,8 @@ export default function RootLayout({ children }) {
     <StoreProvider>
       {/* <SocketProvider> */}
       <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <Sidebar />
-
           <main>
             <Navbar />
             {children}

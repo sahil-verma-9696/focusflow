@@ -14,21 +14,22 @@ export default function CardsComponent() {
   // ✅ Sync real-time updates from server
   useEffect(() => {
     if (!socket) return;
-
+  
     socket.on("sharedStateUpdate", ({ type, payload }) => {
       if (type === "sync" || type === "replace") {
         dispatch(setCards(payload.cards || []));
       } else if (type === "update") {
-        dispatch(setCards(payload.cards)); // ✅ Ensure full state sync
+        dispatch(setCards(payload.cards)); // ✅ Full state sync
       } else if (type === "delete") {
-        dispatch(setCards(payload.cards));
+        dispatch(setCards(payload.cards)); // ✅ Ensure Redux gets correct updated list
       }
     });
-
+  
     return () => {
       socket.off("sharedStateUpdate");
     };
   }, [socket, dispatch]);
+  
 
   // ✅ Add a new card
   const handleAddCard = () => {
@@ -56,11 +57,11 @@ export default function CardsComponent() {
   // ✅ Delete a card & ensure sync
   const handleDeleteCard = (id) => {
     const updatedCards = cards.filter((card) => card.id !== id);
-
-    dispatch(deleteCard(id));
-    socket.emit("sharedStateUpdate", { type: "delete", payload: { cards: updatedCards } });
+  
+    dispatch(deleteCard(id)); // ✅ Local Redux update
+    socket.emit("sharedStateUpdate", { type: "delete", payload: { cardId: id } }); // ✅ Emit delete event
   };
-
+  
   return (
     <div className="p-4 border rounded shadow-md">
       <h2 className="text-xl font-bold mb-3">📌 Cards</h2>

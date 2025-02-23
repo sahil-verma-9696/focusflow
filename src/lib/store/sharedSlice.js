@@ -14,7 +14,9 @@ const sharedSlice = createSlice({
     },
     updateCard: (state, action) => {
       state.cards = state.cards.map((card) =>
-        card.id === action.payload.id ? { ...card, content: action.payload.content } : card
+        card.id === action.payload.id
+          ? { ...card, content: action.payload.content }
+          : card
       );
     },
     deleteCard: (state, action) => {
@@ -23,5 +25,6 @@ const sharedSlice = createSlice({
   },
 });
 
-export const { setCards, addCard, updateCard, deleteCard } = sharedSlice.actions;
+export const { setCards, addCard, updateCard, deleteCard } =
+  sharedSlice.actions;
 export default sharedSlice.reducer;

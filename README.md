@@ -1,7 +1,7 @@
 # 🚀 Project Name: **FocusFlow**
 
 
-![image](https://github.com/user-attachments/assets/59870621-9a0c-4c59-ad11-a952515601bd)
+![image](https://github.com/user-attachments/assets/333f6196-44e7-45cf-a385-a39156ede8e4)
 
 
 
@@ -128,15 +128,21 @@ Special thanks to:
 
 ---
 
-📩 **Contact:** [muskangautam7064@gmail.com]
-                 [sonalv308@gmail.com]
-                 [sahils.verma.1000@gmail.com]
-                 [vanshnigam8081432513@gmail.com] 
+📩 **Contact:** Muskan Gautam: [muskangautam7064@gmail.com]
+                Sonal Verma:[sonalv308@gmail.com]
+                Sahil Verma:[sahils.verma.1000@gmail.com]
+                Vansh Nigam:[vanshnigam8081432513@gmail.com] 
                  
-   **LinkedIn**  (https://www.linkedin.com/in/muskan-gautam-mg893)
-                (https://www.linkedin.com/in/sonal-verma-7b45672aa/)
-                (https://www.linkedin.com/in/sahil-verma-04944b240/)
-                (https://www.linkedin.com/in/vansh-nigam-926302250/)
+**LinkedIn** Muskan Gautam: (https://www.linkedin.com/in/muskan-gautam-mg893)
+                Sonal Verma:(https://www.linkedin.com/in/sonal-verma-7b45672aa/)
+                Sahil Verma:(https://www.linkedin.com/in/sahil-verma-04944b240/)
+                Vansh Nigam:(https://www.linkedin.com/in/vansh-nigam-926302250/)
+
+🐙**Github**   Muskan Gautam:(htpps://github.com/Muskangautam8933)
+                Sonal Verma:(htpps://github.com/sonal-verma-4397)
+                Sahil Verma:(htpps://github.com/sahil-verma-9696)
+                Vansh Nigam:(htpps://github.com/VansshNigam)
+      
 
              
    

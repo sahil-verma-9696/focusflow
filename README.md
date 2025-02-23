@@ -57,7 +57,7 @@ With **FocusFlow**, teams can stay **organized, productive, and presentation-rea
 
 ## 🔧 Tech Stack
 
-- **Frontend: Next.js, React, Redux ,CSS , Tailwind CSS, Sass,Typescript **
+- **Frontend: Next.js, React, Redux ,CSS , Tailwind CSS, Sass,Typescript.**
 - **Backend:  CSS,Tailwind CSS, Sass,Typescript.**
 - **Database: MongoDB.**
 - **Realtime: Socket.io for chat/task updates.**

@@ -132,25 +132,25 @@ Special thanks to:
    👩‍💻 Muskan Gautam
        📧 Email: muskangautam7064@gmail.com
        🔗 LinkedIn: https://www.linkedin.com/in/muskan-gautam-mg893
-       🐙 GitHub: (htpps://github.com/Muskangautam8933)
+       🐙 GitHub: Muskangautam8933
 
 
    👩‍💻 Sonal Verma
        📧 Email: sonalv308@gmail.com
        🔗 LinkedIn: https://www.linkedin.com/in/sonal-verma-7b45672aa/
-       🐙 GitHub: (htpps://github.com/sonal-verma-4397)
+       🐙 GitHub: sonal-verma-4397
 
        
    👨‍💻 Sahil Verma
        📧 Email: sahils.verma.1000@gmail.com
        🔗 LinkedIn: https://www.linkedin.com/in/sahil-verma-04944b240/
-       🐙 GitHub: (htpps://github.com/sahil-verma-9696)
+       🐙 GitHub: sahil-verma-9696
 
        
    👨‍💻 Vansh Nigam
        📧 Email: vanshnigam8081432513@gmail.com
        🔗 LinkedIn: https://www.linkedin.com/in/vansh-nigam-926302250/
-       🐙 GitHub: (htpps://github.com/VansshNigam)
+       🐙 GitHub: VansshNigam
 
       
 

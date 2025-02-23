@@ -5,6 +5,10 @@ import StoreProvider from "./StoreProvider";
 import { SocketProvider } from "@/lib/hooks/socket/hooks";
 import Head from "next/head";
 import Sidebar from "@/components/Sidebar";
+import CustomAlert from "@/components/CustomAlert";
+import { Provider } from "react-redux";
+import { store } from "@/lib/store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,18 +27,21 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <StoreProvider>
-      {/* <SocketProvider> */}
-      <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <Sidebar />
-          <main>
-            <Navbar />
-            {children}
-          </main>
-        </body>
-      </html>
-      {/* </SocketProvider> */}
-    </StoreProvider>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persister}>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <Sidebar />
+            <main>
+              <Navbar />
+              <CustomAlert />
+              {children}
+            </main>
+          </body>
+        </html>
+      </PersistGate>
+    </Provider>
   );
 }

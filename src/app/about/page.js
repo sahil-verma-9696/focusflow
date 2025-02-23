@@ -1,26 +1,11 @@
-"use client";
-import React from "react";
-import style from "./page.css";
-import { increment } from "@/lib/store/features/global/slice";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import React from 'react'
+
 const page = () => {
-  const val = useAppSelector((store) => store.global.value);
-
-  const dispatch = useAppDispatch();
-  function handleClick() {
-    dispatch(increment());
-  }
-
   return (
-    <main>
-      <div className="about text-purple-500">
-        i am about
-        <button className="bg-black text-white" onClick={handleClick}>
-          Click me val = {val}
-        </button>
-      </div>
-    </main>
-  );
-};
+    <div>
+      i am about  
+    </div>
+  )
+}
 
-export default page;
+export default page

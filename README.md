@@ -128,20 +128,30 @@ Special thanks to:
 
 ---
 
-📩 **Contact:** Muskan Gautam: [muskangautam7064@gmail.com]
-                Sonal Verma:[sonalv308@gmail.com]
-                Sahil Verma:[sahils.verma.1000@gmail.com]
-                Vansh Nigam:[vanshnigam8081432513@gmail.com] 
-                 
-**LinkedIn** Muskan Gautam: (https://www.linkedin.com/in/muskan-gautam-mg893)
-                Sonal Verma:(https://www.linkedin.com/in/sonal-verma-7b45672aa/)
-                Sahil Verma:(https://www.linkedin.com/in/sahil-verma-04944b240/)
-                Vansh Nigam:(https://www.linkedin.com/in/vansh-nigam-926302250/)
+📩 Contact
+   👩‍💻 Muskan Gautam
+       📧 Email: muskangautam7064@gmail.com
+       🔗 LinkedIn: Muskan Gautam
+       🐙 GitHub: Muskangautam8933
 
-🐙**Github**   Muskan Gautam:(htpps://github.com/Muskangautam8933)
-                Sonal Verma:(htpps://github.com/sonal-verma-4397)
-                Sahil Verma:(htpps://github.com/sahil-verma-9696)
-                Vansh Nigam:(htpps://github.com/VansshNigam)
+
+   👩‍💻 Sonal Verma
+       📧 Email: sonalv308@gmail.com
+       🔗 LinkedIn: Sonal Verma
+       🐙 GitHub: sonal-verma-4397
+
+       
+   👨‍💻 Sahil Verma
+       📧 Email: sahils.verma.1000@gmail.com
+       🔗 LinkedIn: Sahil Verma
+       🐙 GitHub: sahil-verma-9696
+
+       
+   👨‍💻 Vansh Nigam
+       📧 Email: vanshnigam8081432513@gmail.com
+       🔗 LinkedIn: Vansh Nigam
+       🐙 GitHub: VansshNigam
+
       
 
              

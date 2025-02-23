@@ -1,48 +1,67 @@
-# 🚀 Project Name: **Focus-Flow**
+# 🚀 Project Name: **FocusFlow**
 
 ![Project Banner](./assets/banner.png)
 
 ## 🌟 Overview
 
-Welcome to **Focus-Flow**! This project was built as part of the **FOSS Hackathon 2025** to tackle 
-**[Hackathon team often struggle with ]** using **[mention technologies used]**.
+Welcome to **🚀 FocusFlow**!  
 
-🔹 **Team Name:** [Your Team Name]  
-🔹 **Team Members:** [Member 1], [Member 2], [Member 3], [Member 4]  
+This project was built as part of the **🏆 FOSS Hackathon 2025** to tackle some of the biggest challenges hackathon teams face. Many participants struggle with **🤝 team formation, ⏳ real-time collaboration, and 📊 streamlined project presentation**—often leading to inefficiencies and missed opportunities.  
+
+🔹 **What does FocusFlow do?**  
+✨ **Intelligent Team Matching** – Find the perfect teammates based on skill compatibility.  
+📌 **Real-Time Collaboration Dashboard** – Manage tasks 📝, set deadlines ⏰, and chat 💬 in one place.  
+🖼️ **AI-Powered Presentation Builder** – Auto-generate professional slides 🎤 with just a few inputs.  
+
+**🔧 Built With:**  
+⚡ **Frontend:** Next.js, React, Redux  
+🎨 **Styling:** Tailwind CSS, Sass  
+🛠️ **Backend:** Node.js, Python, FastAPI  
+📂 **Database:** MongoDB, PostgreSQL, Neo4j  
+
+With **FocusFlow**, teams can stay **organized, productive, and presentation-ready** without the usual last-minute chaos. Whether you're a **developer 👨‍💻, designer 🎨, or strategist 📊**, this tool is designed to **maximize efficiency and innovation**. 🚀🔥  
+
+🔹 **Team Name:** [Focus-Flow]  
+🔹 **Team Members:** [Sahil Verma], [Sonal Verma], [Muskan Gautam], [Vansh Nigam]  
 🔹 **Hackathon:** FOSS Hackathon 2025  
 
 ---
 
 ## 🛠️ Features
-1.Team Matching & Project Setup – [* Users create profiles with skills (Frontend,backend,design)
-                                   * Match teammates based on skill gaps.
-                                   * Pre-built project templates(e.g.,"Blockchain MVP",AI Chatbot).
-2.Real-Time Collaboration Dashboard-[* Task board with drag-and-drop cards.
-                                    *Integrated timer for hackathon deadlines.
-                                    *Live chat for team communication.]
-3.Auto-Generated Presentation Builder-[* Users input key project details(problem, solution, tech stack).
-                                       * AI-powered slide generator (simple template engine).
-                                       *  Export to PDF/PPT or share via a live link].
+✅ **Team Matching & Project Setup**  
+   - Users create profiles with skills (Frontend, Backend, Design).
+   - Match teammates based on skill gaps.
+   - Pre-built project templates.
 
+✅ **Real-Time Collaboration Dashboard**  
+   - Task board with drag-and-drop cards.
+   - Integrated timer for hackathon deadlines.
+   - Live chat for team communication.
+
+✅ **Auto-Generated Presentation Builder**  
+   - Users input key project details (problem, solution, tech stack).
+   - AI-powered slide generator (simple template engine).
+   - Export to PDF/PPT or share via a live link.
 
 ---
 
 ## 📸 Screenshots
 
 ![Screenshot 1](./assets/screenshot1.png)
-*Caption for Screenshot 1*
+*Dashboard Overview*
 
 ![Screenshot 2](./assets/screenshot2.png)
-*Caption for Screenshot 2*
+*Team Matching Feature*
 
 ---
 
 ## 🔧 Tech Stack
 
-- **Frontend:** [React.js / Vanilla JS / HTML & CSS]
-- **Backend:** [Node.js / Python / Django / FastAPI]
-- **Database:** [MongoDB / PostgreSQL / Neo4j]
-- **Other Tools:** [WebAssembly, AI Models, APIs]
+- **Frontend: React.js (Material-UI or Chakra UI for rapid styling).**
+- **Backend: Node.js + Express.js.**
+- **Database: MongoDB (store users, teams, tasks).**
+- **Realtime: Socket.io for chat/task updates.**
+- **Optional: Markdown-to-PPT library for presentations.**
 
 ---
 
@@ -51,34 +70,38 @@ Welcome to **Focus-Flow**! This project was built as part of the **FOSS Hackatho
 ### Prerequisites
 Ensure you have the following installed:
 - [Node.js](https://nodejs.org/)
-- [Python](https://www.python.org/)
 - Any other dependencies
 
 ### Installation
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/your-project.git
+git clone https://github.com/your-username/focusflow.git
 
 # Navigate into the project directory
-cd your-project
+cd focusflow
 
 # Install dependencies
-npm install  # or pip install -r requirements.txt
+npm install 
 ```
 
 ### Running the Project
 ```bash
-# Start the frontend
-npm start  # or python app.py
+# Start the development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start the production server
+npm run start
 ```
 
 ---
 
 ## 🎯 Future Improvements
-- [ ] Feature Enhancement 1
-- [ ] Feature Enhancement 2
-- [ ] Mobile Responsiveness
-- [ ] Performance Optimization
+- [ ] GitHub Sync: Automatically create a repo with a README template.
+- [ ] Devpost Integration: Auto-fill submission forms with project data.
+- [ ] Offline Mode: Use local storage to let teams work without internet.
 
 ---
 
@@ -94,10 +117,21 @@ This project is licensed under the **MIT License** – see the [LICENSE](./LICEN
 
 ## 📝 Acknowledgments
 Special thanks to:
-- **[Organization / Mentor Name]** for guidance
+- **[FOSS UNITED KANPUR]** for guidance
 - **FOSS Hackathon 2025** for the platform
 - **Community** for support
 
 ---
 
-📩 **Contact:** [Your Email] | [LinkedIn](https://www.linkedin.com/in/muskan-gautam-mg893) | [Twitter](https://twitter.com/yourhandle)
+📩 **Contact:** [muskangautam7064@gmail.com]
+                 [sonalv308@gmail.com]
+                 [sahils.verma.1000@gmail.com]
+                 [vanshnigam8081432513@gmail.com] 
+                 
+   **LinkedIn**  (https://www.linkedin.com/in/muskan-gautam-mg893)
+                (https://www.linkedin.com/in/sonal-verma-7b45672aa/)
+                (https://www.linkedin.com/in/sahil-verma-04944b240/)
+                (https://www.linkedin.com/in/vansh-nigam-926302250/)
+
+             
+   

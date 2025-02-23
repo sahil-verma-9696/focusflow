@@ -10,11 +10,13 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, action) => {
-      state.name = action.payload.name;
-      state.workspaceId = action.payload.workspaceId; // ✅ Store workspaceId properly
+      return action.payload
     },
+    setWorkspaceId: (state, action) => {
+      state.workspaceId = action.payload;
+    }
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser,setWorkspaceId } = userSlice.actions;
 export default userSlice.reducer;

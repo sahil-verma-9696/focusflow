@@ -5,10 +5,20 @@
 ## 🌟 Overview
 
 Welcome to **Focus-Flow**! This project was built as part of the **FOSS Hackathon 2025** to tackle 
-**[Hackathon team often struggle with ]** using **[mention technologies used]**.
+**[Hackathon team often struggle with:
+     1.Coordination: Lack of a Centralized Platform for task management and communication.
+     2.Time Management: Difficulty tracking deadlines and progress
+     3.Presentation Prep: Last-minute rush to create slides for judging]** using 
+    
+**[Tech Stack
+     Frontend: React.js (Material-UI or Chakra UI rapid styling).
+     Backend: Node.js + Express.js.
+     Daatabase: MongoDB(Store users, teams,tasks).
+     Realtime: Socket.io for chat/task updates.
+     Optional:Markdown-to-PPT library for presentation.]**.
 
-🔹 **Team Name:** [Your Team Name]  
-🔹 **Team Members:** [Member 1], [Member 2], [Member 3], [Member 4]  
+🔹 **Team Name:** [The Code Warriors]  
+🔹 **Team Members:** [Sahil Verma], [Sonal Verma], [Muskan Gautam], [Vansh Nigam]  
 🔹 **Hackathon:** FOSS Hackathon 2025  
 
 ---

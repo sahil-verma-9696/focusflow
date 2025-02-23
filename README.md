@@ -1,6 +1,11 @@
 # 🚀 Project Name: **FocusFlow**
 
-![Project Banner](./assets/banner.png)
+
+![image](https://github.com/user-attachments/assets/59870621-9a0c-4c59-ad11-a952515601bd)
+
+
+
+
 
 ## 🌟 Overview
 

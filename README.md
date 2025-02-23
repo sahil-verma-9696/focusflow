@@ -128,29 +128,27 @@ Special thanks to:
 
 ---
 
-📩 Contact.
-   👩‍💻 Muskan Gautam
-       📧 Email: muskangautam7064@gmail.com.
-       🔗 LinkedIn: https://www.linkedin.com/in/muskan-gautam-mg893
-       🐙 GitHub: Muskangautam8933
+📩 **Contact.**  
 
+👩‍💻 **Muskan Gautam**  
+📧 Email: [muskangautam7064@gmail.com](mailto:muskangautam7064@gmail.com)  
+🔗 LinkedIn: [Muskan Gautam](https://www.linkedin.com/in/muskan-gautam-mg893)  
+🐙 GitHub: [Muskangautam8933](https://github.com/Muskangautam8933)  
 
-   👩‍💻 Sonal Verma
-       📧 Email: sonalv308@gmail.com
-       🔗 LinkedIn: https://www.linkedin.com/in/sonal-verma-7b45672aa/
-       🐙 GitHub: sonal-verma-4397
+👩‍💻 **Sonal Verma**  
+📧 Email: [sonalv308@gmail.com](mailto:sonalv308@gmail.com)  
+🔗 LinkedIn: [Sonal Verma](https://www.linkedin.com/in/sonal-verma-7b45672aa/)  
+🐙 GitHub: [sonal-verma-4397](https://github.com/sonal-verma-4397)  
 
-       
-   👨‍💻 Sahil Verma
-       📧 Email: sahils.verma.1000@gmail.com
-       🔗 LinkedIn: https://www.linkedin.com/in/sahil-verma-04944b240/
-       🐙 GitHub: sahil-verma-9696
+👨‍💻 **Sahil Verma**  
+📧 Email: [sahils.verma.1000@gmail.com](mailto:sahils.verma.1000@gmail.com)  
+🔗 LinkedIn: [Sahil Verma](https://www.linkedin.com/in/sahil-verma-04944b240/)  
+🐙 GitHub: [sahil-verma-9696](https://github.com/sahil-verma-9696)  
 
-       
-   👨‍💻 Vansh Nigam
-       📧 Email: vanshnigam8081432513@gmail.com
-       🔗 LinkedIn: https://www.linkedin.com/in/vansh-nigam-926302250/
-       🐙 GitHub: VansshNigam
+👨‍💻 **Vansh Nigam**  
+📧 Email: [vanshnigam8081432513@gmail.com](mailto:vanshnigam8081432513@gmail.com)  
+🔗 LinkedIn: [Vansh Nigam](https://www.linkedin.com/in/vansh-nigam-926302250/)  
+🐙 GitHub: [VanshNigam](https://github.com/VanshNigam)  
 
       
 

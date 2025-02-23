@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import StoreProvider from "./StoreProvider";
+import "./globals.css";
 
 export default function RootLayout({ children }) {
   return (

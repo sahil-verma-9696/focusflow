@@ -19,7 +19,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-gray-800 text-white">
+    <nav className="flex items-center justify-between p-4 bg-red-800 text-white">
       <h1 className="text-lg font-bold">{user.name || "Guest"}</h1>
       {workspaceLink.includes("/workspace/") && (
         <button onClick={copyLink} className="bg-blue-600 px-3 py-1 rounded">

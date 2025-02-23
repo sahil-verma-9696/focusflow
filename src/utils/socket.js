@@ -17,6 +17,12 @@ export const connectSocket = (workspaceId, username) => {
     console.log("👥 Users in workspace:", users);
   });
 
+  socket.on("syncCards", (cards) => {
+    console.log("📌 Syncing Cards:", cards);
+    store.dispatch(setCards(cards));
+  });
+  
+
   socket.on("disconnect", () => {
     console.log("❌ Disconnected from workspace");
   });

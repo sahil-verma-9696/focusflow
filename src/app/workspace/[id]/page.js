@@ -1,36 +1,43 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter, useParams } from "next/navigation"; // ✅ Fix: useParams for dynamic routes
+import { useEffect, useState,use } from "react";
+import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
-import { connectSocket } from "@/utils/socket";
+import { connectSocket, getSocket } from "@/utils/socket";
 import { setUser } from "@/lib/store/userSlice";
+import { setCards } from "@/lib/store/sharedSlice";
+import CardsComponent from "@/components/CardsComponent";
 
-export default function WorkspacePage() {
+export default function page({ params }) {
+  const workspaceId = use(params).id;
+
   const router = useRouter();
-  const params = useParams(); // ✅ Fix: Get params correctly
-  const workspaceId = params?.id; // ✅ Unwrap safely
   const dispatch = useDispatch();
   const username = useSelector((state) => state.user.name);
   const [users, setUsers] = useState([]);
   const [tempName, setTempName] = useState("");
 
   useEffect(() => {
-    if (!username || !workspaceId) return; // Ensure username & workspaceId exist
-
+    if (!username) return;
     const socket = connectSocket(workspaceId, username);
 
     socket.on("updateUsers", (usersList) => {
       setUsers(usersList.map(([_, name]) => name));
     });
 
+    socket.on("sharedStateUpdate", ({ type, payload }) => {
+      if (type === "sync" || type === "replace") {
+        dispatch(setCards(payload.cards || []));
+      }
+    });
+
     return () => {
       socket.disconnect();
     };
-  }, [username, workspaceId]);
+  }, [username, workspaceId, dispatch]);
 
   const handleJoin = () => {
     if (!tempName.trim()) return alert("Enter your name!");
-    dispatch(setUser({ name: tempName })); // ✅ Save name in Redux store
+    dispatch(setUser({ name: tempName }));
   };
 
   if (!username) {
@@ -60,6 +67,11 @@ export default function WorkspacePage() {
           <li key={index}>{user}</li>
         ))}
       </ul>
+
+      <div className="mt-5">
+        <h2 className="text-xl">Shared Cards:</h2>
+        <CardsComponent />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,96 @@
+"use client";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { getSocket } from "@/utils/socket";
+import { addCard, updateCard, deleteCard, setCards } from "@/lib/store/sharedSlice";
+import { v4 as uuidv4 } from "uuid";
+
+export default function CardsComponent() {
+  const dispatch = useDispatch();
+  const cards = useSelector((state) => state.shared.cards);
+  const socket = getSocket();
+  const [newCardContent, setNewCardContent] = useState("");
+
+  // ✅ Sync real-time updates from server
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("sharedStateUpdate", ({ type, payload }) => {
+      if (type === "sync" || type === "replace") {
+        dispatch(setCards(payload.cards || []));
+      } else if (type === "update") {
+        dispatch(setCards(payload.cards)); // ✅ Ensure full state sync
+      } else if (type === "delete") {
+        dispatch(setCards(payload.cards));
+      }
+    });
+
+    return () => {
+      socket.off("sharedStateUpdate");
+    };
+  }, [socket, dispatch]);
+
+  // ✅ Add a new card
+  const handleAddCard = () => {
+    if (!newCardContent.trim()) return;
+
+    const newCard = { id: uuidv4(), content: newCardContent };
+    const updatedCards = [...cards, newCard];
+
+    dispatch(addCard(newCard));
+    socket.emit("sharedStateUpdate", { type: "update", payload: { cards: updatedCards } });
+
+    setNewCardContent("");
+  };
+
+  // ✅ Update a card
+  const handleUpdateCard = (id, newContent) => {
+    const updatedCards = cards.map((card) =>
+      card.id === id ? { ...card, content: newContent } : card
+    );
+
+    dispatch(updateCard({ id, content: newContent }));
+    socket.emit("sharedStateUpdate", { type: "update", payload: { cards: updatedCards } });
+  };
+
+  // ✅ Delete a card & ensure sync
+  const handleDeleteCard = (id) => {
+    const updatedCards = cards.filter((card) => card.id !== id);
+
+    dispatch(deleteCard(id));
+    socket.emit("sharedStateUpdate", { type: "delete", payload: { cards: updatedCards } });
+  };
+
+  return (
+    <div className="p-4 border rounded shadow-md">
+      <h2 className="text-xl font-bold mb-3">📌 Cards</h2>
+
+      <div className="space-y-2">
+        {cards.map((card) => (
+          <div key={card.id} className="p-2 border rounded flex justify-between">
+            <input
+              type="text"
+              value={card.content}
+              onChange={(e) => handleUpdateCard(card.id, e.target.value)}
+              className="border p-1 rounded w-full mr-2"
+            />
+            <button onClick={() => handleDeleteCard(card.id)} className="text-red-500">❌</button>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-4 flex">
+        <input
+          type="text"
+          value={newCardContent}
+          onChange={(e) => setNewCardContent(e.target.value)}
+          placeholder="Enter card content..."
+          className="border p-2 rounded w-full"
+        />
+        <button onClick={handleAddCard} className="bg-blue-600 text-white px-4 py-2 rounded ml-2">
+          ➕ Add Card
+        </button>
+      </div>
+    </div>
+  );
+}

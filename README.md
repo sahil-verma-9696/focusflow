@@ -14,10 +14,10 @@ This project was built as part of the **🏆 FOSS Hackathon 2025** to tackle som
 🖼️ **AI-Powered Presentation Builder** – Auto-generate professional slides 🎤 with just a few inputs.  
 
 **🔧 Built With:**  
-⚡ **Frontend:** Next.js, React, Redux  
-🎨 **Styling:** Tailwind CSS, Sass  
-🛠️ **Backend:** Node.js, Python, FastAPI  
-📂 **Database:** MongoDB, PostgreSQL, Neo4j  
+⚡ **Frontend:** Next.js, React, Redux 
+🎨 **Styling:**  CSS , Tailwind CSS, Sass,Typescript   
+🛠️ **Backend:** Node.js 
+📂 **Database:** MongoDB 
 
 With **FocusFlow**, teams can stay **organized, productive, and presentation-ready** without the usual last-minute chaos. Whether you're a **developer 👨‍💻, designer 🎨, or strategist 📊**, this tool is designed to **maximize efficiency and innovation**. 🚀🔥  
 
@@ -57,9 +57,9 @@ With **FocusFlow**, teams can stay **organized, productive, and presentation-rea
 
 ## 🔧 Tech Stack
 
-- **Frontend: React.js (Material-UI or Chakra UI for rapid styling).**
-- **Backend: Node.js + Express.js.**
-- **Database: MongoDB (store users, teams, tasks).**
+- **Frontend: Next.js, React, Redux ,CSS , Tailwind CSS, Sass,Typescript **
+- **Backend:  CSS,Tailwind CSS, Sass,Typescript.**
+- **Database: MongoDB.**
 - **Realtime: Socket.io for chat/task updates.**
 - **Optional: Markdown-to-PPT library for presentations.**
 

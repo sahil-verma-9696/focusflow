@@ -128,9 +128,9 @@ Special thanks to:
 
 ---
 
-📩 Contact
+📩 Contact.
    👩‍💻 Muskan Gautam
-       📧 Email: muskangautam7064@gmail.com
+       📧 Email: muskangautam7064@gmail.com.
        🔗 LinkedIn: https://www.linkedin.com/in/muskan-gautam-mg893
        🐙 GitHub: Muskangautam8933
 

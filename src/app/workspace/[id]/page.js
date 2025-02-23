@@ -1,49 +1,30 @@
 "use client";
-import { use, useEffect, useState } from "react";
+import { useEffect, useState, use } from "react";
 import { useRouter } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { connectSocket } from "@/utils/socket";
-import { setHackathons } from "@/libs/store/features/hackathons/slice";
 
 export default function HackathonDashboard({ params }) {
   const hackathonId = use(params)?.id;
   const router = useRouter();
-  const dispatch = useDispatch();
-  const username = useSelector((state) => state.user.user.name);
+  const username = useSelector((state) => state.user.user?.name);
+  const tasks = useSelector((store) => store.shared.tasks);
+  const labels = useSelector((store) => store.shared.labels);
+
   const [participants, setParticipants] = useState([]);
-  const [tasks, setTasks] = useState({
-    todo: [],
-    inProgress: [],
-    completed: [],
-  });
 
   useEffect(() => {
     if (!username) return;
     const socket = connectSocket(hackathonId, username);
 
     socket.on("updateUsers", (participantsList) => {
-      setParticipants(
-        participantsList.map((user) => {
-          console.log(user);
-          return `${user[1]}` || user;
-        })
-      );
-    });
-
-    socket.on("taskUpdate", ({ type, payload }) => {
-      if (type === "sync") {
-        setTasks({
-          todo: payload.tasks.filter((t) => t.status === "todo"),
-          inProgress: payload.tasks.filter((t) => t.status === "inProgress"),
-          completed: payload.tasks.filter((t) => t.status === "completed"),
-        });
-      }
+      setParticipants(participantsList.map((user) => user[1] || user));
     });
 
     return () => {
       socket.disconnect();
     };
-  }, [username, hackathonId, dispatch]);
+  }, [username, hackathonId]);
 
   if (!username) {
     return (
@@ -64,7 +45,7 @@ export default function HackathonDashboard({ params }) {
   }
 
   return (
-    <div className="p-5 grid gap-6 grid-cols-1 md:grid-cols-3">
+    <div className="p-5 grid gap-6 grid-cols-1 md:grid-cols-4">
       {/* Participants Card */}
       <div className="bg-white p-4 shadow-lg rounded-xl">
         <h2 className="text-lg font-semibold">👥 Participants</h2>
@@ -77,27 +58,35 @@ export default function HackathonDashboard({ params }) {
         </ul>
       </div>
 
-      {/* Task Board */}
-      <div className="col-span-2 grid grid-cols-3 gap-4">
-        {Object.entries(tasks).map(([status, taskList]) => (
-          <div key={status} className="bg-gray-100 p-4 rounded-lg shadow">
-            <h3 className="text-lg font-bold text-gray-700">
-              {status.toUpperCase()}
-            </h3>
-            <div className="mt-2 space-y-2">
-              {taskList.length > 0 ? (
-                taskList.map((task) => (
-                  <div key={task.id} className="bg-white p-3 shadow rounded-lg">
-                    <h4 className="font-semibold">{task.title}</h4>
-                    <p className="text-sm text-gray-600">{task.description}</p>
-                  </div>
-                ))
-              ) : (
-                <p className="text-gray-500">No tasks yet.</p>
-              )}
+      {/* Labels with Tasks */}
+      <div className="col-span-3 grid grid-cols-1 md:grid-cols-3 gap-4">
+        {labels.map((label) => {
+          const filteredTasks = tasks.filter(
+            (task) => task.label === label.name
+          );
+          return (
+            <div key={label.id} className="bg-gray-100 p-4 rounded-lg shadow">
+              <h3 className="text-lg font-bold text-gray-700">{label.name}</h3>
+              <div className="mt-2 space-y-2">
+                {filteredTasks.length > 0 ? (
+                  filteredTasks.map((task) => (
+                    <div
+                      key={task.id}
+                      className="bg-white p-3 shadow rounded-lg"
+                    >
+                      <h4 className="font-semibold">{task.title}</h4>
+                      <p className="text-sm text-gray-600">
+                        {task.description || "No description"}
+                      </p>
+                    </div>
+                  ))
+                ) : (
+                  <p className="text-gray-500">No tasks yet.</p>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 
-export default function HackathonManager() {
+export default function HackathonManager({hackathonId}) {
   const dispatch = useDispatch();
   const workspaceId = useSelector((state) => state.user.workspaceId);
   const hackathons = useSelector((state) => state.hackathons.hackathons);
@@ -83,8 +83,8 @@ export default function HackathonManager() {
   };
 
   // ✅ Manage button click handler
-  function handleManageBtn() {
-    router.push(`/workspace/${workspaceId}`);
+  function handleManageBtn(id) {
+    router.push(`/workspace/${id}`);
   }
 
   return (
@@ -119,7 +119,7 @@ export default function HackathonManager() {
             {/* Buttons */}
             <div className="mt-3 flex gap-4">
               <button
-                onClick={handleManageBtn}
+                onClick={()=>handleManageBtn(hackathon.id)}
                 className="bg-blue-500 text-white px-3 py-2 rounded w-full"
               >
                 📝 Manage
@@ -184,3 +184,41 @@ export default function HackathonManager() {
     </div>
   );
 }
+// {/* <div className="p-5 grid gap-6 grid-cols-1 md:grid-cols-3">
+//       {/* Participants Card */}
+//       <div className="bg-white p-4 shadow-lg rounded-xl">
+//         <h2 className="text-lg font-semibold">👥 Participants</h2>
+//         <ul className="mt-2 space-y-1">
+//           {participants.length > 0 ? (
+//             participants.map((user, index) => <li key={index}>{user}</li>)
+//           ) : (
+//             <p className="text-gray-500">No participants yet.</p>
+//           )}
+//         </ul>
+//       </div>
+
+//       {/* Tasks by Labels */}
+//       <div className="col-span-2 grid grid-cols-1 md:grid-cols-2 gap-4">
+//         {labels.map((label) => (
+//           <div key={label.id} className="bg-gray-100 p-4 rounded-lg shadow">
+//             <h3 className="text-lg font-bold text-gray-700">{label.name.toUpperCase()}</h3>
+//             <div className="mt-2 space-y-2">
+//               {tasks.filter((task) => task.label === label.name).length > 0 ? (
+//                 tasks
+//                   .filter((task) => task.label === label.name)
+//                   .map((task) => (
+//                     <Task
+//                       key={task.id}
+//                       task={task}
+//                       onEdit={(id) => console.log("Edit", id)}
+//                       onDelete={(id) => console.log("Delete", id)}
+//                     />
+//                   ))
+//               ) : (
+//                 <p className="text-gray-500">No tasks under this label.</p>
+//               )}
+//             </div>
+//           </div>
+//         ))}
+//       </div>
+//     </div> */}

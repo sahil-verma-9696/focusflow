@@ -19,6 +19,7 @@ export const store = configureStore({
     shared: sharedReducer, // Register shared slice
     alert: alertReducer,
     hackathons: hackathonReducer,
+    
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

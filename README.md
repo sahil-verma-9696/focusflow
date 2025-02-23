@@ -5,29 +5,25 @@
 ## 🌟 Overview
 
 Welcome to **Focus-Flow**! This project was built as part of the **FOSS Hackathon 2025** to tackle 
-**[Hackathon team often struggle with:
-     1.Coordination: Lack of a Centralized Platform for task management and communication.
-     2.Time Management: Difficulty tracking deadlines and progress
-     3.Presentation Prep: Last-minute rush to create slides for judging]** using 
-    
-**[Tech Stack
-     Frontend: React.js (Material-UI or Chakra UI rapid styling).
-     Backend: Node.js + Express.js.
-     Daatabase: MongoDB(Store users, teams,tasks).
-     Realtime: Socket.io for chat/task updates.
-     Optional:Markdown-to-PPT library for presentation.]**.
+**[Hackathon team often struggle with ]** using **[mention technologies used]**.
 
-🔹 **Team Name:** [The Code Warriors]  
-🔹 **Team Members:** [Sahil Verma], [Sonal Verma], [Muskan Gautam], [Vansh Nigam]  
+🔹 **Team Name:** [Your Team Name]  
+🔹 **Team Members:** [Member 1], [Member 2], [Member 3], [Member 4]  
 🔹 **Hackathon:** FOSS Hackathon 2025  
 
 ---
 
 ## 🛠️ Features
-✅ Feature 1 – [Brief description]  
-✅ Feature 2 – [Brief description]  
-✅ Feature 3 – [Brief description]  
-✅ Feature 4 – [Brief description]  
+1.Team Matching & Project Setup – [* Users create profiles with skills (Frontend,backend,design)
+                                   * Match teammates based on skill gaps.
+                                   * Pre-built project templates(e.g.,"Blockchain MVP",AI Chatbot).
+2.Real-Time Collaboration Dashboard-[* Task board with drag-and-drop cards.
+                                    *Integrated timer for hackathon deadlines.
+                                    *Live chat for team communication.]
+3.Auto-Generated Presentation Builder-[* Users input key project details(problem, solution, tech stack).
+                                       * AI-powered slide generator (simple template engine).
+                                       *  Export to PDF/PPT or share via a live link].
+
 
 ---
 

@@ -53,7 +53,7 @@ export default function Navbar() {
         />
 
         {/* Display Profile */}
-        <div className="size-10 bg-white rounded-full text-3xl text-black flex justify-center items-center">
+        <div className="size-10 bg-white rounded-full text-3xl text-black flex justify-center items-center shadow-lg">
           {user?.name ? user?.name[0] : "G"}
         </div>
 

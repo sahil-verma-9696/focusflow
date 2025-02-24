@@ -52,11 +52,11 @@ export default function LabelsComponent() {
             className="absolute w-full h-full rounded-lg"
             animate={{
               boxShadow: [
-                "0px 0px 5px rgba(128, 0, 128, 0.3), 0px 0px 5px  rgba(128, 0, 128, 0.5)",
-                "0px 0px 5px rgba(75, 0, 130, 0.5), 0px 0px 5px  rgba(75, 0, 130, 0.7)",
-                "0px 0px 5px rgba(148, 0, 211, 0.5), 0px 0px 5px  rgba(148, 0, 211, 0.7)",
-                "0px 0px 5px rgba(75, 0, 130, 0.5), 0px 0px 5px   rgba(75, 0, 130, 0.7)",
-                "0px 0px 5px rgba(128, 0, 128, 0.3), 0px 0px 5px  rgba(128, 0, 128, 0.5)",
+                "0px 0px 10px rgba(128, 0, 128, 0.3), 0px 0px 10px  rgba(128, 0, 128, 0.5)",
+                "0px 0px 10px rgba(75, 0, 130, 0.5), 0px 0px 10px  rgba(75, 0, 130, 0.7)",
+                "0px 0px 10px rgba(148, 0, 211, 0.5), 0px 0px 10px  rgba(148, 0, 211, 0.7)",
+                "0px 0px 10px rgba(75, 0, 130, 0.5), 0px 0px 10px   rgba(75, 0, 130, 0.7)",
+                "0px 0px 10px rgba(128, 0, 128, 0.3), 0px 0px 10px  rgba(128, 0, 128, 0.5)",
               ],
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}

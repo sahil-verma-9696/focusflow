@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { connectSocket, getSocket } from "@/utils/socket";
 import { updateSharedState } from "@/libs/store/features/shared/slice";
 import CardsComponent from "@/components/CardsComponents";
+import TasksComponent from "@/components/TasksComponent";
 
 export default function Page({ params }) {
   const router = useRouter();
@@ -84,6 +85,7 @@ export default function Page({ params }) {
       <div className="mt-5">
         <h2 className="text-xl">Shared Workspace Data:</h2>
         <CardsComponent />
+        <TasksComponent/>
         {/* You can add more components for other shared data types here */}
       </div>
     </div>

@@ -22,29 +22,21 @@ export default function CardsComponent() {
     if (!socket) return;
 
     socket.on("sharedStateUpdate", ({ type, key, payload }) => {
-      if (key === "cards") {
-        if (type === "sync") {
-          dispatch(replaceSharedState(payload));
-        } else if (type === "merge") {
-          const uniqueCards = payload.filter(
-            (newCard) =>
-              !cards.some((existingCard) => existingCard.id === newCard.id)
-          );
-          if (uniqueCards.length > 0) {
-            dispatch(
-              updateSharedState({ key, payload: [...cards, ...uniqueCards] })
-            );
-          }
-        } else {
-          dispatch(updateSharedState({ key, payload }));
-        }
+      if (type === "sync") {
+        dispatch(replaceSharedState(payload));
+      } else if (type === "merge") {
+        dispatch(mergeSharedState({ key, payload }));
+      } else if (type === "update") {
+        dispatch(updateSharedState({ key, payload }));
+      } else if (type === "delete") {
+        dispatch(removeSharedKey({ key }));
       }
     });
 
     return () => {
       socket.off("sharedStateUpdate");
     };
-  }, [socket, dispatch, cards]);
+  }, [socket, dispatch]); // ✅ Now it listens for ANY state change (cards + tasks)
 
   // ✅ Add a new card and sync with others
   const handleAddCard = () => {

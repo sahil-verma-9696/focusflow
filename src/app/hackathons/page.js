@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 import HackathonManager from "@/components/HackathonManager";
 
-export default function HackathonPage({ params }) {
+export default function HackathonPage() {
 
   const username = useSelector((state) => state.user.user);
 

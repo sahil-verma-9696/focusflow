@@ -10,7 +10,7 @@ export default function Navbar() {
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState("login");
   const user = useSelector((state) => state.user.user);
-  console.log(user);
+  
   const pathname = usePathname();
   const [workspaceLink, setWorkspaceLink] = useState("");
 

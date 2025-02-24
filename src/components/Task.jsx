@@ -2,7 +2,18 @@ import React, { useState } from "react";
 import { MoreVertical } from "lucide-react";
 import Menubar from "./Menubar";
 
-const Task = ({ task, onEdit, onDelete }) => {
+const Task = ({ task, onEdit, onDelete,socket }) => {
+
+  const fields = [
+    { name: "title", label: "Title", type: "text", required: true },
+    { name: "assignee", label: "Assignee", type: "text", required: false },
+    { name: "status", label: "Status", type: "text", required: true },
+    { name: "label", label: "Label", type: "text", required: true },
+    { name: "deadline", label: "Deadline", type: "datetime-local", required: true },
+    { name: "description", label: "Description", type: "textarea", required: true },
+  ];
+  
+  
   return (
     <div
       className="bg-white shadow-lg rounded-xl p-4 mb-4 relative w-full max-w-md"

@@ -5,8 +5,8 @@ import { useSharedState } from "@/libs/hooks/useSharedState";
 export default function TasksComponent() {
   const {
     items: tasks,
-    newItemContent,
-    setNewItemContent,
+    newItem,
+    setNewItem,
     addItem,
     updateItem,
     deleteItem,
@@ -15,9 +15,9 @@ export default function TasksComponent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleAddTask = () => {
-    if (!newItemContent.trim()) return;
-    addItem(newItemContent);
-    setNewItemContent("");
+    if (!newItem.title.trim() || !newItem.description.trim()) return;
+    addItem();
+    setNewItem({ title: "", description: "" }); // Reset after adding
     setIsModalOpen(false);
   };
 
@@ -30,12 +30,28 @@ export default function TasksComponent() {
             key={task.id}
             className="p-4 border rounded-lg shadow-md bg-white flex flex-col"
           >
+            {/* Task Title */}
             <input
               type="text"
-              value={task.content}
-              onChange={(e) => updateItem(task.id, e.target.value)}
-              className="border p-2 rounded w-full text-lg font-medium"
+              value={task.title || ""} // Ensure default value
+              onChange={(e) =>
+                updateItem(task.id, { title: e.target.value })
+              }
+              className="border p-2 rounded w-full text-lg font-bold"
+              placeholder="Task Title"
             />
+
+            {/* Task Description */}
+            <textarea
+              value={task.description || ""} // Ensure default value
+              onChange={(e) =>
+                updateItem(task.id, { description: e.target.value })
+              }
+              className="border p-2 rounded w-full mt-2 text-sm"
+              placeholder="Task Description"
+            ></textarea>
+
+            {/* Delete Button */}
             <button
               onClick={() => deleteItem(task.id)}
               className="mt-2 text-red-500 font-semibold"
@@ -44,24 +60,43 @@ export default function TasksComponent() {
             </button>
           </div>
         ))}
+
+        {/* Add New Task Button */}
         <button
           onClick={() => setIsModalOpen(true)}
-          className="border-2 border-dashed rounded-lg p-4"
+          className="border-2 border-dashed rounded-lg p-4 flex items-center justify-center"
         >
           ➕ New Task
         </button>
       </div>
 
+      {/* Add Task Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-96">
             <h3 className="text-xl font-bold mb-4">Add New Task</h3>
+
+            {/* Title Input */}
             <input
               type="text"
-              value={newItemContent}
-              onChange={(e) => setNewItemContent(e.target.value)}
-              className="border p-3 rounded-lg w-full text-lg"
+              value={newItem.title || ""} // Ensure default value
+              onChange={(e) =>
+                setNewItem((prev) => ({ ...prev, title: e.target.value }))
+              }
+              className="border p-3 rounded-lg w-full text-lg mb-2"
+              placeholder="Task Title"
             />
+
+            {/* Description Input */}
+            <textarea
+              value={newItem.description || ""} // Ensure default value
+              onChange={(e) =>
+                setNewItem((prev) => ({ ...prev, description: e.target.value }))
+              }
+              className="border p-3 rounded-lg w-full text-sm"
+              placeholder="Task Description"
+            ></textarea>
+
             <div className="flex justify-end mt-4">
               <button
                 onClick={() => setIsModalOpen(false)}

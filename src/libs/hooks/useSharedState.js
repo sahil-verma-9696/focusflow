@@ -14,7 +14,8 @@ export function useSharedState(key) {
   const socket = getSocket();
   const dispatch = useDispatch();
   const items = useSelector((state) => state.shared[key] || []);
-  const [newItemContent, setNewItemContent] = useState("");
+  
+  const [newItem, setNewItem] = useState({ title: "", description: "" });
 
   useEffect(() => {
     if (!socket) return;
@@ -28,7 +29,7 @@ export function useSharedState(key) {
         dispatch(mergeSharedState({ key, payload }));
       } else if (type === "update") {
         dispatch(updateSharedState({ key, payload }));
-      }else if (type === "delete") {
+      } else if (type === "delete") {
         dispatch(removeSharedKey({ key }));
       }
     });
@@ -38,23 +39,22 @@ export function useSharedState(key) {
     };
   }, [socket, dispatch, key]);
 
-  // Add an item
+  // Add an item (object-based)
   const addItem = () => {
-    if (!newItemContent.trim()) return;
+    if (!newItem.title.trim() || !newItem.description.trim()) return;
 
-    const newItem = { id: uuidv4(), content: newItemContent };
-    if (items.some((item) => item.id === newItem.id)) return;
+    const newTask = { id: uuidv4(), ...newItem };
 
-    dispatch(updateSharedState({ key, payload: [...items, newItem] }));
-    sendSharedStateUpdate("merge", key, [newItem]);
+    dispatch(updateSharedState({ key, payload: [...items, newTask] }));
+    sendSharedStateUpdate("merge", key, [newTask]);
 
-    setNewItemContent("");
+    setNewItem({ title: "", description: "" });
   };
 
-  // Update an item
-  const updateItem = (id, newContent) => {
+  // Update an item (object-based)
+  const updateItem = (id, updatedFields) => {
     const updatedItems = items.map((item) =>
-      item.id === id ? { ...item, content: newContent } : item
+      item.id === id ? { ...item, ...updatedFields } : item
     );
 
     dispatch(updateSharedState({ key, payload: updatedItems }));
@@ -69,5 +69,5 @@ export function useSharedState(key) {
     sendSharedStateUpdate("update", key, updatedItems);
   };
 
-  return { items, newItemContent, setNewItemContent, addItem, updateItem, deleteItem };
+  return { items, newItem, setNewItem, addItem, updateItem, deleteItem };
 }

@@ -1,4 +1,3 @@
-// TasksComponent.jsx
 "use client";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
@@ -14,13 +13,12 @@ export default function TasksComponent() {
   const socket = getSocket();
   const dispatch = useDispatch();
 
-  // Ensure `tasks` exists in state and is always an array
   const tasks = useSelector((state) => state.shared.tasks || []);
   const [newTaskContent, setNewTaskContent] = useState("");
 
   useEffect(() => {
     if (!socket) return;
-  
+
     socket.on("sharedStateUpdate", ({ type, key, payload }) => {
       if (type === "sync") {
         dispatch(replaceSharedState(payload));
@@ -32,12 +30,11 @@ export default function TasksComponent() {
         dispatch(removeSharedKey({ key }));
       }
     });
-  
+
     return () => {
       socket.off("sharedStateUpdate");
     };
   }, [socket, dispatch]); // ✅ Now it listens for ANY state change (cards + tasks)
-  
 
   // Add a new task
   const handleAddTask = () => {
@@ -52,7 +49,6 @@ export default function TasksComponent() {
     setNewTaskContent("");
   };
 
-  // Update a task
   const handleUpdateTask = (id, newContent) => {
     const updatedTasks = tasks.map((task) =>
       task.id === id ? { ...task, content: newContent } : task

@@ -5,6 +5,7 @@ const sharedSlice = createSlice({
   initialState: {
     cards: [],
     tasks: [],
+    labels: []
   },
   reducers: {
     updateSharedState: (state, action) => {

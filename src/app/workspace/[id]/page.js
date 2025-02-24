@@ -6,6 +6,7 @@ import { connectSocket, getSocket } from "@/utils/socket";
 import { updateSharedState } from "@/libs/store/features/shared/slice";
 import CardsComponent from "@/components/CardsComponents";
 import TasksComponent from "@/components/TasksComponent";
+import LabelsComponent from "@/components/LabelsComponent";
 
 export default function Page({ params }) {
   const router = useRouter();
@@ -86,6 +87,7 @@ export default function Page({ params }) {
         <h2 className="text-xl">Shared Workspace Data:</h2>
         <CardsComponent />
         <TasksComponent/>
+        <LabelsComponent/>
         {/* You can add more components for other shared data types here */}
       </div>
     </div>

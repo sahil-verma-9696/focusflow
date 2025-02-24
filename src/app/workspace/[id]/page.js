@@ -85,7 +85,7 @@ export default function Page({ params }) {
       {/* ✅ Shared Data Components */}
       <div className="mt-5">
         <h2 className="text-xl">Shared Workspace Data:</h2>
-        <CardsComponent />
+        {/* <CardsComponent /> */}
         <TasksComponent/>
         <LabelsComponent/>
         {/* You can add more components for other shared data types here */}

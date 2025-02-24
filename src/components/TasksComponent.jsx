@@ -34,9 +34,7 @@ export default function TasksComponent() {
             <input
               type="text"
               value={task.title || ""} // Ensure default value
-              onChange={(e) =>
-                updateItem(task.id, { title: e.target.value })
-              }
+              onChange={(e) => updateItem(task.id, { title: e.target.value })}
               className="border p-2 rounded w-full text-lg font-bold"
               placeholder="Task Title"
             />

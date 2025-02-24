@@ -15,7 +15,7 @@ export const connectSocket = (workspaceId, username) => {
   if (!workspaceId || !username)
     return console.error("❌ Missing workspaceId or username");
 
-  socket = io("http://localhost:5000", {
+  socket = io(process.env.NEXT_PUBLIC_SERVER_URL, {
     query: { workspaceId, username },
   });
 

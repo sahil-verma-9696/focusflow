@@ -32,6 +32,9 @@ export default function Navbar() {
     alert("Sign up clicked!");
   }
 
+  console.log(process.env.NEXT_PUBLIC_API_URL);
+
+
   return (
     <nav className="flex items-center justify-between p-4 bg-white-800 text-white">
       <h1 className="text-lg font-bold"></h1>

@@ -1,90 +1,109 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 import Menubar from "./Menubar";
 import AuthForm from "./AuthForm";
+import ShareButton from "./ShareButton";
+import { logout } from "@/libs/store/features/auth/slice";
+import { showAlert } from "@/libs/store/features/alert/slice";
+import DarkModeToggle from "./DarkmodeToggle";
 
 export default function Navbar() {
+  const dispatch = useDispatch();
+  const pathname = usePathname();
   const [showForm, setShowForm] = useState(false);
   const [formType, setFormType] = useState("login");
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.auth?.user);
 
-  const pathname = usePathname();
-  const [workspaceLink, setWorkspaceLink] = useState("");
-
-  const handleOpenForm = (type) => {
-    setFormType(type);
-    setShowForm(true);
+  // Function to generate a color based on the user's initial
+  const getColorForLetter = (letter) => {
+    const colors = [
+      "bg-red-500",
+      "bg-blue-500",
+      "bg-green-500",
+      "bg-yellow-500",
+      "bg-purple-500",
+      "bg-pink-500",
+      "bg-orange-500",
+    ];
+    return colors[letter.charCodeAt(0) % colors.length];
   };
 
-  useEffect(() => {
-    setWorkspaceLink(`${window.location.origin}${pathname}`);
-  }, [pathname]);
+  const userInitial = user?.name ? user.name[0].toUpperCase() : "G";
+  const bgColor = getColorForLetter(userInitial);
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(workspaceLink);
-    alert("Workspace link copied!");
-  };
-
-  function handleSignup() {
-    alert("Sign up clicked!");
+  async function handleAuth() {
+    if (user?.name) {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/api/auth/logout"
+      );
+      if (response.ok) {
+        dispatch(logout());
+        dispatch(
+          showAlert({ type: "success", message: "Logged out successfully" })
+        );
+      } else {
+        dispatch(showAlert({ type: "error", message: "Failed to logout" }));
+      }
+      return;
+    } else {
+      setShowForm(true);
+      setFormType("login");
+    }
   }
 
   return (
-    <nav className="flex items-center justify-between p-4 bg-white-800">
-      <h1 className="text-3xl font-bold">FOCUS-FLOW</h1>
+    <nav className="flex items-center justify-between p-4 bg-gray-900 shadow-md">
+      {/* Logo */}
+      <h1 className="text-2xl font-bold text-white tracking-wide">
+        FOCUS-FLOW
+      </h1>
 
-      <div className="flex items-center gap-4">
-        <Menubar
-          options={[
-            {
-              label: user?.name,
-            },
-            {
-              label: "Sign Up",
-              action: () => handleOpenForm("signup"),
-            },
-            {
-              label: "Logout",
-            },
-          ]}
-        />
+      {/* Right Section */}
+      <div className="flex items-center gap-6">
+        {pathname.includes("/workspace/") && <ShareButton />}
 
-        {/* Display Profile */}
-        <div className="size-10 bg-white rounded-full text-3xl text-black flex justify-center items-center shadow-lg">
-          {user?.name ? user?.name[0] : "G"}
+        {/* User Avatar */}
+        <div
+          className={`size-10 ${bgColor} rounded-full text-xl text-white flex justify-center items-center shadow-lg`}
+        >
+          {userInitial}
         </div>
 
-        {/* Form */}
-        {showForm && (
-          <AuthForm
-            fields={[
-              { name: "name", type: "text", placeholder: "Username" },
-              { name: "email", type: "email", placeholder: "Email" },
-              {
-                name: "password",
-                type: "password",
-                placeholder: "Password",
-                isrequired: true,
-              },
-            ]}
-            baseUrl={process.env.NEXT_PUBLIC_SERVER_URL}
-            onSuccess={() => setShowForm(false)}
-            showForm={showForm}
-            formType={formType}
-            onClose={() => setShowForm(false)}
-          />
-        )}
-
-        {/* Share btn */}
-        {workspaceLink.includes("/workspace/") && (
-          <button onClick={copyLink} className="bg-blue-600 px-3 py-1 rounded">
-            Share
-          </button>
-        )}
+        {/* Menu */}
+        <Menubar
+          options={[
+            { label: user?.name ? user.name : "Guest" },
+            {
+              label: user?.name ? "Logout" : "Login/Signup",
+              action: handleAuth,
+            },
+          ]}
+          className="text-white"
+        />
+        <DarkModeToggle />
       </div>
+      {/* Auth Form Modal */}
+      {showForm && (
+        <AuthForm
+          fields={[
+            { name: "name", type: "text", placeholder: "Username" },
+            { name: "email", type: "email", placeholder: "Email" },
+            {
+              name: "password",
+              type: "password",
+              placeholder: "Password",
+              isrequired: true,
+            },
+          ]}
+          baseUrl={process.env.NEXT_PUBLIC_SERVER_URL}
+          onSuccess={() => setShowForm(false)}
+          formType={formType}
+          onClose={() => setShowForm(false)}
+        />
+      )}
     </nav>
   );
 }

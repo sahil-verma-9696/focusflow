@@ -3,6 +3,7 @@ import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import Navbar from "@/components/Navbar";
 import CustomAlert from "@/components/CustomAlert";
+import Sidebar from "@/components/Sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,13 +23,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className="">
         <StoreProvider>
-          <Navbar />
-          <CustomAlert />
-          {children}
+          <div className="">
+            <CustomAlert />
+            {children}
+          </div>
         </StoreProvider>
       </body>
     </html>

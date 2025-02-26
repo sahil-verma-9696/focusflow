@@ -24,7 +24,7 @@ const CustomAlert = () => {
 
   return (
     <div
-      className={`fixed top-5 left-1/2 -translate-x-1/2 right-5 px-4 py-2 w-fit rounded-lg text-white shadow-lg ${
+      className={`z-50 fixed top-5 left-1/2 -translate-x-1/2 right-5 px-4 py-2 w-fit rounded-lg text-white shadow-lg ${
         alertStyles[alert.type] || "bg-gray-500"
       }`}
     >

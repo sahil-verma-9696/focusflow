@@ -26,7 +26,7 @@ export default function LabelsComponent() {
     <div className="p-6">
       <h2 className="text-2xl font-bold mb-4">🏷 Labels</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {labels.map((label) => (
+        {labels?.map((label) => (
           <div
             key={label.id}
             className="p-4 border rounded-lg shadow-md bg-white flex flex-col"
@@ -52,11 +52,11 @@ export default function LabelsComponent() {
             className="absolute w-full h-full rounded-lg"
             animate={{
               boxShadow: [
-                "0px 0px 5px rgba(128, 0, 128, 0.3), 0px 0px 5px  rgba(128, 0, 128, 0.5)",
-                "0px 0px 5px rgba(75, 0, 130, 0.5), 0px 0px 5px  rgba(75, 0, 130, 0.7)",
-                "0px 0px 5px rgba(148, 0, 211, 0.5), 0px 0px 5px  rgba(148, 0, 211, 0.7)",
-                "0px 0px 5px rgba(75, 0, 130, 0.5), 0px 0px 5px   rgba(75, 0, 130, 0.7)",
-                "0px 0px 5px rgba(128, 0, 128, 0.3), 0px 0px 5px  rgba(128, 0, 128, 0.5)",
+                "0px 0px 10px rgba(128, 0, 128, 0.3), 0px 0px 10px  rgba(128, 0, 128, 0.5)",
+                "0px 0px 10px rgba(75, 0, 130, 0.5), 0px 0px 10px  rgba(75, 0, 130, 0.7)",
+                "0px 0px 10px rgba(148, 0, 211, 0.5), 0px 0px 10px  rgba(148, 0, 211, 0.7)",
+                "0px 0px 10px rgba(75, 0, 130, 0.5), 0px 0px 10px   rgba(75, 0, 130, 0.7)",
+                "0px 0px 10px rgba(128, 0, 128, 0.3), 0px 0px 10px  rgba(128, 0, 128, 0.5)",
               ],
             }}
             transition={{ duration: 3, repeat: Infinity, ease: "linear" }}

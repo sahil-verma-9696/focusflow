@@ -53,7 +53,7 @@ export function useSharedState(key) {
 
   // Update an item (object-based)
   const updateItem = (id, updatedFields) => {
-    const updatedItems = items.map((item) =>
+    const updatedItems = items?.map((item) =>
       item.id === id ? { ...item, ...updatedFields } : item
     );
 

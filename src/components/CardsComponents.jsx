@@ -9,7 +9,7 @@ export default function CardsComponent() {
     <div className="p-4 border rounded shadow-md">
       <h2 className="text-xl font-bold mb-3">📌 Cards</h2>
       <div className="space-y-2">
-        {cards.map((card) => (
+        {cards?.map((card) => (
           <div key={card.id} className="p-2 border rounded flex justify-between">
             <input
               type="text"

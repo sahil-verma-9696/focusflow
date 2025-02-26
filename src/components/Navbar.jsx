@@ -1,147 +1,86 @@
-<<<<<<< HEAD
-import React from 'react'
-
-const Navbar = () => {
-  return (
-    <nav className='bg-slate-600 text-white'>
-      i am nav bar
-    </nav>
-  )
-}
-
-export default Navbar
-=======
 "use client";
 
-import { useSelector } from "react-redux";
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { usePathname, useRouter } from "next/navigation";
 import Menubar from "./Menubar";
-import AuthForm from "./AuthForm";
+import ShareButton from "./ShareButton";
+import { logout } from "@/libs/store/features/auth/slice";
+import { showAlert } from "@/libs/store/features/alert/slice";
+import DarkModeToggle from "./DarkmodeToggle";
+import { CONST_APP_NAME } from "@/utils/constant";
 
 export default function Navbar() {
-  const [showForm, setShowForm] = useState(false);
-  const [formType, setFormType] = useState("login");
-  const user = useSelector((state) => state.user.user);
-  
+  const dispatch = useDispatch();
   const pathname = usePathname();
-  const [workspaceLink, setWorkspaceLink] = useState("");
 
-  const handleOpenForm = (type) => {
-    setFormType(type);
-    setShowForm(true);
+  const user = useSelector((state) => state.auth?.user);
+  const router = useRouter();
+  const getColorForLetter = (letter) => {
+    const colors = [
+      "bg-red-500",
+      "bg-blue-500",
+      "bg-green-500",
+      "bg-yellow-500",
+      "bg-purple-500",
+      "bg-pink-500",
+      "bg-orange-500",
+    ];
+    return colors[letter.charCodeAt(0) % colors.length];
   };
 
-  useEffect(() => {
-    setWorkspaceLink(`${window.location.origin}${pathname}`);
-  }, [pathname]);
+  const userInitial = user?.name ? user.name[0].toUpperCase() : "G";
+  const bgColor = getColorForLetter(userInitial);
 
-  const copyLink = () => {
-    navigator.clipboard.writeText(workspaceLink);
-    alert("Workspace link copied!");
-  };
-
-  function handleSignup() {
-    alert("Sign up clicked!");
+  async function handleAuth() {
+    if (user?.name) {
+      const response = await fetch(
+        process.env.NEXT_PUBLIC_SERVER_URL + "/api/auth/logout"
+      );
+      if (response.ok) {
+        dispatch(logout());
+        dispatch(
+          showAlert({ type: "success", message: "Logged out successfully" })
+        );
+      } else {
+        dispatch(showAlert({ type: "error", message: "Failed to logout" }));
+      }
+      return;
+    } else {
+      router.push("/auth/login");
+    }
   }
 
-  console.log(process.env.NEXT_PUBLIC_API_URL);
-
-
   return (
-    <nav className="flex items-center justify-between p-4 bg-white-800 text-white">
-      <h1 className="text-lg font-bold"></h1>
+    <nav className="sticky top-0 z-10 flex items-center justify-between p-4 px-12 shadow-md bg-white">
+      {/* Logo */}
+      <h1 className="text-3xl font-bold text-text-light tracking-wide">
+        {CONST_APP_NAME}
+      </h1>
 
-      <div className="flex items-center gap-4">
-        <Menubar
-          options={[
-            {
-              label: user?.name,
-            },
-            {
-              label: "Sign Up",
-              action: () => handleOpenForm("signup"),
-            },
-            {
-              label: "Logout",
-            },
-          ]}
-        />
+      {/* Right Section */}
+      <div className="flex items-center gap-6">
+        {pathname.includes("/workspace/") && <ShareButton />}
 
-        {/* Display Profile */}
-        <div className="size-10 bg-white rounded-full text-3xl text-black flex justify-center items-center">
-          {user?.name ? user?.name[0] : "G"}
+        {/* User Avatar */}
+        <div
+          className={`size-10 ${bgColor} rounded-full text-xl text-white flex justify-center items-center shadow-lg`}
+        >
+          {userInitial}
         </div>
 
-        {/* Form */}
-        {showForm && (
-          <AuthForm
-            fields={[
-              { name: "name", type: "text", placeholder: "Username" },
-              { name: "email", type: "email", placeholder: "Email" },
-              {
-                name: "password",
-                type: "password",
-                placeholder: "Password",
-                isrequired: true,
-              },
-            ]}
-            baseUrl={"http://localhost:5000"}
-            onSuccess={() => setShowForm(false)}
-            showForm={showForm}
-            formType={formType}
-            onClose={() => setShowForm(false)}
-          />
-        )}
-
-        {/* Share btn */}
-        {workspaceLink.includes("/workspace/") && (
-          <button onClick={copyLink} className="bg-blue-600 px-3 py-1 rounded">
-            Share
-          </button>
-        )}
+        {/* Menu */}
+        <Menubar
+          options={[
+            { label: user?.name ? user.name : "Guest" },
+            {
+              label: user?.name ? "Logout" : "Login/Signup",
+              action: handleAuth,
+            },
+          ]}
+          className="text-white"
+        />
+        <DarkModeToggle />
       </div>
     </nav>
   );
 }
-
-// "use client";
-
-// import React, { useState } from "react";
-// import AuthForm from "./AuthForm";
-
-// const Navbar = () => {
-//   const [showForm, setShowForm] = useState(false);
-//   const [formType, setFormType] = useState("login");
-
-//   console.log(process.env.BASE_URL)
-
-//   const handleOpenForm = (type) => {
-//     setFormType(type);
-//     setShowForm(true);
-//   };
-
-//   return (
-//     <nav className="bg-gray-800 text-white p-4 flex justify-between items-center">
-//       <h1 className="text-xl font-bold">My App</h1>
-//       <div className="flex gap-4">
-//         <button
-//           onClick={() => handleOpenForm("login")}
-//           className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-400"
-//         >
-//           Login
-//         </button>
-//         <button
-//           onClick={() => handleOpenForm("signup")}
-//           className="bg-green-500 px-4 py-2 rounded hover:bg-green-400"
-//         >
-//           Signup
-//         </button>
-//       </div>
-
-//     </nav>
-//   );
-// };
-
-// export default Navbar;
->>>>>>> finalbr

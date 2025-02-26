@@ -20,7 +20,7 @@ const sharedSlice = createSlice({
         state[key] = Array.isArray(payload) ? payload : [payload];
       } else if (Array.isArray(state[key])) {
         // ✅ Ensure uniqueness by filtering out duplicates
-        const existingIds = new Set(state[key].map((item) => item.id));
+        const existingIds = new Set(state[key]?.map((item) => item.id));
         const newItems = payload.filter((item) => !existingIds.has(item.id));
     
         state[key] = [...state[key], ...newItems]; // ✅ Only adds new unique items

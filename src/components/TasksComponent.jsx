@@ -1,6 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useSharedState } from "@/libs/hooks/useSharedState";
+import { Grid, Table, TimerReset, PlusCircle } from "lucide-react";
+import TaskCard from "./TaskCard";
+import TaskModal from "./TaskModal";
+import TableView from "./TableView";
+import TimelineView from "./TimelineView";
 
 export default function TasksComponent() {
   const {
@@ -13,104 +18,98 @@ export default function TasksComponent() {
   } = useSharedState("tasks");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const statuses = ["To Do", "In Progress", "Done"];
+  const [view, setView] = useState("grid");
 
   const handleAddTask = () => {
     if (!newItem.title.trim() || !newItem.description.trim()) return;
     addItem();
-    setNewItem({ title: "", description: "" }); // Reset after adding
+    setNewItem({
+      title: "",
+      description: "",
+      status: "To Do",
+      attendees: [],
+      dueDate: "",
+    });
     setIsModalOpen(false);
   };
 
   return (
     <div className="p-6">
-      <h2 className="text-2xl font-bold mb-4">📋 Tasks</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {tasks.map((task) => (
-          <div
-            key={task.id}
-            className="p-4 border rounded-lg shadow-md bg-white flex flex-col"
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-3xl font-bold flex items-center gap-2">📋 Tasks</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setView("grid")}
+            className={`flex items-center gap-2 px-4 py-2 rounded ${
+              view === "grid" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
           >
-            {/* Task Title */}
-            <input
-              type="text"
-              value={task.title || ""} // Ensure default value
-              onChange={(e) => updateItem(task.id, { title: e.target.value })}
-              className="border p-2 rounded w-full text-lg font-bold"
-              placeholder="Task Title"
-            />
+            <Grid size={18} />
+            Grid View
+          </button>
 
-            {/* Task Description */}
-            <textarea
-              value={task.description || ""} // Ensure default value
-              onChange={(e) =>
-                updateItem(task.id, { description: e.target.value })
-              }
-              className="border p-2 rounded w-full mt-2 text-sm"
-              placeholder="Task Description"
-            ></textarea>
+          <button
+            onClick={() => setView("table")}
+            className={`flex items-center gap-2 px-4 py-2 rounded ${
+              view === "table" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            <Table size={18} />
+            Table View
+          </button>
 
-            {/* Delete Button */}
-            <button
-              onClick={() => deleteItem(task.id)}
-              className="mt-2 text-red-500 font-semibold"
-            >
-              ❌ Delete
-            </button>
-          </div>
-        ))}
-
-        {/* Add New Task Button */}
+          <button
+            onClick={() => setView("timeline")}
+            className={`flex items-center gap-2 px-4 py-2 rounded ${
+              view === "timeline" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            <TimerReset size={18} />
+            Timeline View
+          </button>
+        </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="border-2 border-dashed rounded-lg p-4 flex items-center justify-center"
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
         >
-          ➕ New Task
+          <PlusCircle size={20} /> Add Task
         </button>
       </div>
 
-      {/* Add Task Modal */}
-      {isModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-xl font-bold mb-4">Add New Task</h3>
-
-            {/* Title Input */}
-            <input
-              type="text"
-              value={newItem.title || ""} // Ensure default value
-              onChange={(e) =>
-                setNewItem((prev) => ({ ...prev, title: e.target.value }))
-              }
-              className="border p-3 rounded-lg w-full text-lg mb-2"
-              placeholder="Task Title"
+      {view === "grid" && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {tasks.map((task) => (
+            <TaskCard
+              key={task.id}
+              task={task}
+              updateItem={updateItem}
+              deleteItem={deleteItem}
+              statuses={statuses}
             />
-
-            {/* Description Input */}
-            <textarea
-              value={newItem.description || ""} // Ensure default value
-              onChange={(e) =>
-                setNewItem((prev) => ({ ...prev, description: e.target.value }))
-              }
-              className="border p-3 rounded-lg w-full text-sm"
-              placeholder="Task Description"
-            ></textarea>
-
-            <div className="flex justify-end mt-4">
-              <button
-                onClick={() => setIsModalOpen(false)}
-                className="mr-2 px-4 py-2 bg-gray-300 rounded-lg"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleAddTask}
-                className="bg-blue-600 text-white px-5 py-2 rounded-lg"
-              >
-                ➕ Add Task
-              </button>
-            </div>
-          </div>
+          ))}
         </div>
+      )}
+
+      {view === "table" && (
+        <TableView
+          tasks={tasks}
+          updateItem={updateItem}
+          deleteItem={deleteItem}
+        />
+      )}
+
+      {view === "timeline" && <TimelineView tasks={tasks} />}
+
+      {isModalOpen && (
+        <TaskModal
+          isOpen={isModalOpen}
+          closeModal={() => setIsModalOpen(false)}
+          newItem={newItem}
+          setNewItem={setNewItem}
+          handleAddTask={handleAddTask}
+          statuses={statuses}
+        />
       )}
     </div>
   );

@@ -158,3 +158,97 @@ Special thanks to:
 =======
    
 >>>>>>> finalbr
+
+
+
+"use client";
+import { useState } from "react";
+import { useSharedState } from "@/libs/hooks/useSharedState";
+import { PlusCircle, Table, BarChart2 } from "lucide-react";
+import TaskCard from "./TaskCard";
+import TaskModal from "./TaskModal";
+import TableView from "./TableView";
+import TimelineView from "./TimelineView";
+
+export default function TasksComponent() {
+  const {
+    items: tasks,
+    newItem,
+    setNewItem,
+    addItem,
+  } = useSharedState("tasks");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [view, setView] = useState("grid");
+
+  const handleAddTask = () => {
+    if (!newItem.title.trim() || !newItem.description.trim()) return;
+    addItem();
+    setNewItem({
+      title: "",
+      description: "",
+      status: "To Do",
+      attendees: [],
+      dueDate: "",
+    });
+    setIsModalOpen(false);
+  };
+
+  return (
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-3xl font-bold">📋 Tasks</h2>
+        <div className="flex gap-2">
+          <button
+            onClick={() => setView("grid")}
+            className={`px-3 py-2 rounded-lg ${
+              view === "grid" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            Grid
+          </button>
+          <button
+            onClick={() => setView("table")}
+            className={`px-3 py-2 rounded-lg ${
+              view === "table" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            <Table size={18} />
+          </button>
+          <button
+            onClick={() => setView("timeline")}
+            className={`px-3 py-2 rounded-lg ${
+              view === "timeline" ? "bg-blue-600 text-white" : "bg-gray-200"
+            }`}
+          >
+            <BarChart2 size={18} />
+          </button>
+        </div>
+        <button
+          onClick={() => setIsModalOpen(true)}
+          className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-700 transition"
+        >
+          <PlusCircle size={20} /> Add Task
+        </button>
+      </div>
+
+      {view === "grid" && (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {tasks.map((task) => (
+            <TaskCard key={task.id} task={task} />
+          ))}
+        </div>
+      )}
+      {view === "table" && <TableView tasks={tasks} />}
+      {view === "timeline" && <TimelineView tasks={tasks} />}
+
+      {isModalOpen && (
+        <TaskModal
+          onClose={() => setIsModalOpen(false)}
+          newItem={newItem}
+          setNewItem={setNewItem}
+          handleAddTask={handleAddTask}
+        />
+      )}
+    </div>
+  );
+}

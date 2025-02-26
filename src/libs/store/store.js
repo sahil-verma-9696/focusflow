@@ -1,25 +1,26 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import userReducer from "./features/user/slice"; 
+import authReducer from "./features/auth/slice";
 import sharedReducer from "./features/shared/slice"; // Import shared slice
-import alertReducer from "./features/alert/slice"
+import alertReducer from "./features/alert/slice";
 import hackathonReducer from "./features/hackathons/slice";
+import uiReducer from "./features/ui/slice";
 
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const persistedReducer = persistReducer(persistConfig, userReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 export const store = configureStore({
   reducer: {
-    user: persistedReducer,
+    auth: persistedReducer,
     shared: sharedReducer, // Register shared slice
     alert: alertReducer,
     hackathons: hackathonReducer,
-    
+    ui: uiReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -29,4 +30,4 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store); 
+export const persistor = persistStore(store);

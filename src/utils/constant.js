@@ -1,0 +1,1 @@
+export const CONST_APP_NAME = "COLLAB HUB"

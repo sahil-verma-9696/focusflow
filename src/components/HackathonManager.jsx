@@ -10,10 +10,10 @@ import {
 } from "@/libs/store/features/hackathons/slice";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+import Hackathon from "./Hackathon";
 
-export default function HackathonManager({hackathonId}) {
+export default function HackathonManager({ hackathonId }) {
   const dispatch = useDispatch();
-  const workspaceId = useSelector((state) => state.user.workspaceId);
   const hackathons = useSelector((state) => state.hackathons.hackathons);
   const socket = getSocket();
   const [newHackathon, setNewHackathon] = useState({
@@ -58,7 +58,7 @@ export default function HackathonManager({hackathonId}) {
 
   // ✅ Update hackathon
   const handleUpdateHackathon = (id, field, value) => {
-    const updatedHackathons = hackathons.map((hackathon) =>
+    const updatedHackathons = hackathons?.map((hackathon) =>
       hackathon.id === id ? { ...hackathon, [field]: value } : hackathon
     );
 
@@ -94,44 +94,7 @@ export default function HackathonManager({hackathonId}) {
       {/* Hackathons Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {hackathons.map((hackathon) => (
-          <div
-            key={hackathon.id}
-            className="bg-white shadow-lg rounded-xl p-4 border flex flex-col justify-between h-80"
-          >
-            <div>
-              <h3 className="text-xl font-bold text-blue-700">
-                {hackathon.name}
-              </h3>
-              <p className="text-gray-600 text-sm mt-2">
-                {hackathon.description}
-              </p>
-              <p className="text-gray-500 text-sm mt-2">📅 {hackathon.date}</p>
-              <a
-                href={hackathon.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 underline mt-2 block"
-              >
-                🔗 Visit Hackathon
-              </a>
-            </div>
-
-            {/* Buttons */}
-            <div className="mt-3 flex gap-4">
-              <button
-                onClick={()=>handleManageBtn(hackathon.id)}
-                className="bg-blue-500 text-white px-3 py-2 rounded w-full"
-              >
-                📝 Manage
-              </button>
-              <button
-                onClick={() => handleDeleteHackathon(hackathon.id)}
-                className="bg-red-500 text-white px-3 py-2 rounded w-full"
-              >
-                ❌ Delete
-              </button>
-            </div>
-          </div>
+          <Hackathon hackathon={hackathon}/>
         ))}
       </div>
 

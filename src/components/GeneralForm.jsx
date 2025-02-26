@@ -22,7 +22,7 @@ const GeneralForm = ({ title, fields, isOpen, onClose, onSubmit }) => {
       <div className="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 className="text-lg font-semibold mb-4">{title}</h2>
         <div className="space-y-4">
-          {fields.map((field) => (
+          {fields?.map((field) => (
             <div key={field.name}>
               <label className="block font-medium">{field.label}</label>
               {field.type === "textarea" ? (

@@ -31,7 +31,7 @@ const Menubar = ({ options = [] }) => {
       {/* Dropdown Menu */}
       {isOpen && (
         <div className="absolute top-full right-0 mt-2 w-40 bg-white dark:bg-gray-800 shadow-lg rounded-lg py-2 z-50 border border-gray-200 dark:border-gray-700">
-          {options.map((option, index) => (
+          {options?.map((option, index) => (
             <button
               key={index}
               onClick={() => {
